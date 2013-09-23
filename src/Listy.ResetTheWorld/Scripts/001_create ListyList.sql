@@ -1,0 +1,9 @@
+﻿
+CREATE TABLE [dbo].[ListyList] (
+	[Id] UNIQUEIDENTIFIER NOT NULL,
+	[Name] NVARCHAR(MAX) NOT NULL,
+
+	CONSTRAINT [PK_ListyList] PRIMARY KEY ([Id])
+)
+GO
+
