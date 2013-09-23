@@ -24,7 +24,10 @@ namespace Listy.Web.Controllers.Api
             {
                 using (session.BeginTransaction())
                 {
-                    var lists = session.CreateCriteria<ListyList>().List<ListyList>();
+                    var lists = session
+                        .QueryOver<ListyList>()
+                        .OrderBy(l => l.Name).Asc
+                        .List<ListyList>();
                     return lists.Select(l => new
                         {
                             Id = l.Id,
