@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Listy.Data.Entities;
+using Listy.Web.Models.Api.List;
 using NHibernate;
 
 namespace Listy.Web.Controllers.Api
@@ -24,7 +25,17 @@ namespace Listy.Web.Controllers.Api
             using (var transaction = session.BeginTransaction())
             {
                 var list = session.Get<ListyList>(id);
+
                 Update(list, model);
+
+                var ordinal = 0;
+                foreach (var item in model.Items ?? new ListItemUpdateModel[0])
+                {
+                    var listItem = list.Items.First(x => x.Id == item.Id);
+                    listItem.Ordinal = ordinal++;
+                    listItem.Name = item.Name;
+                }
+
                 transaction.Commit();
             }
         }
@@ -33,10 +44,5 @@ namespace Listy.Web.Controllers.Api
         {
             list.Name = model.Name;
         }
-    }
-
-    public class ListUpdateModel
-    {
-        public string Name { get; set; }
     }
 }

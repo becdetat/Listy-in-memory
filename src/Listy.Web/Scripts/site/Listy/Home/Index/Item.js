@@ -4,7 +4,13 @@ Listy.Home.Index.Item = function (dto) {
     var self = this;
 
     self.name = ko.observable(dto.Name);
-    self.ordinal = ko.observable(dto.Ordinal);
+
+    self.toSaveModel = function() {
+        return {
+            Id: dto.Id,
+            Name: self.name()
+        };
+    };
 };
 
 

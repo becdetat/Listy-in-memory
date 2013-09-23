@@ -34,7 +34,7 @@
                 </div>
             </form>
         </div>
-        <ul class="list-group" data-bind="foreach: items">
+        <ul class="list-group" data-bind="sortable: { data: items, afterMove: save }">
             <li class="list-group-item" data-bind="text: name"></li>
         </ul>
     </div>

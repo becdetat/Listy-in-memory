@@ -24,7 +24,7 @@ namespace Listy.Web
 
             // Remember order is important!
             bundles.Add(new ScriptBundle("~/bundles/js")
-                            .Include("~/Scripts/jquery-1.9.1.js")
+                            .Include("~/Scripts/jquery-2.0.3.js")
                             .Include("~/Scripts/jquery-ui-1.10.3.js")
                             .Include("~/Scripts/bootstrap.js")
                             .Include("~/Scripts/knockout-2.3.0.js")
