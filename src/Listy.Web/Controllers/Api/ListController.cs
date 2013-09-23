@@ -31,13 +31,27 @@ namespace Listy.Web.Controllers.Api
                 var ordinal = 0;
                 foreach (var item in model.Items ?? new ListItemUpdateModel[0])
                 {
-                    var listItem = list.Items.First(x => x.Id == item.Id);
+                    var listItem = GetOrAddItem(list, item);
                     listItem.Ordinal = ordinal++;
                     listItem.Name = item.Name;
                 }
 
                 transaction.Commit();
             }
+        }
+
+        static ListyListItem GetOrAddItem(ListyList list, ListItemUpdateModel model)
+        {
+            if (model.Id.HasValue) return list.Items.First(i => i.Id == model.Id);
+
+            var item = new ListyListItem();
+
+            list.Items.Add(item);
+            // I'm sure I shouldn't have to do this but it complains about
+            // ListyListId being null...
+            item.ListyList = list;
+            
+            return item;
         }
 
         static void Update(ListyList list, ListUpdateModel model)

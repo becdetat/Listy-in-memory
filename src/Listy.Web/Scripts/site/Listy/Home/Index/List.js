@@ -9,6 +9,8 @@ Listy.Home.Index.List = function(dto) {
     }));
     self.editing = ko.observable(false);
     self.oldName = '';
+    self.isAddingItem = ko.observable(false);
+    self.editedItem = ko.observable();
 
     self.startEditing = function() {
         self.editing(true);
@@ -18,6 +20,20 @@ Listy.Home.Index.List = function(dto) {
         self.editing(false);
         self.name(self.oldName);
     };
+
+    self.startEditingItem = function(item) {
+        item.startEditing();
+        self.editedItem(item);
+    };
+
+    self.cancelEditingItem = function(item) {
+        item.cancelEditing();
+        if (self.isAddingItem()) {
+            self.items.pop();
+            self.isAddingItem(false);
+        }
+    };
+
     self.save = function() {
         $.post('/api/list/' + dto.Id, self.toSaveViewModel())
             .error(Listy.handleAjaxFail)
@@ -25,6 +41,11 @@ Listy.Home.Index.List = function(dto) {
             })
             .always(function() {
                 self.editing(false);
+                if (self.editedItem()) {
+                    self.editedItem().finishEditing();
+                    self.editedItem(null);
+                }
+                self.isAddingItem(false);
             });
         return false;
     };
@@ -38,10 +59,10 @@ Listy.Home.Index.List = function(dto) {
     };
 
     self.addItem = function () {
-        // Whoops, implement editing an item first.
-        
-        //var item = new Listy.Home.Index.Item();
-        //item.
-        //self.items().add();
+        self.isAddingItem(true);
+        var item = new Listy.Home.Index.Item();
+        item.startEditing();
+        self.editedItem(item);
+        self.items.push(item);
     };
 };
