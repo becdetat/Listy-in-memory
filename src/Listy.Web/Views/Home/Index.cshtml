@@ -12,10 +12,28 @@
 
 <h2>@ViewBag.Title</h2>
 
+<p class="btn-toolbar pull-right">
+    <a class="btn btn-primary" data-bind="click: createNewList">
+        <i class="glyphicon glyphicon-plus"></i> Create a new list
+    </a>
+</p>
+
+
 <!-- ko foreach: lists -->
 <div class="col-lg-3">
     <div class="panel panel-default">
-        <div class="panel-heading" data-bind="text: name"></div>
+        <div class="panel-heading">
+            <span data-bind="text: name, visible: !editing(), click: startEditing"></span>
+            <form data-bind="visible: editing, submit: save">
+                <div class="input-group">
+                    <input class="form-control" type="text" data-bind="value: name" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-ok"></i></button>
+                        <button class="btn btn-danger" data-bind="click: cancel"><i class="glyphicon glyphicon-remove"></i></button>    
+                    </span>
+                </div>
+            </form>
+        </div>
         <ul class="list-group" data-bind="foreach: items">
             <li class="list-group-item" data-bind="text: name"></li>
         </ul>

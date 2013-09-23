@@ -5,6 +5,10 @@ Listy.Home.Index.ViewModel = function() {
 
     self.lists = ko.observableArray();
 
+    self.createNewList = function () {
+        alert('not implemented yet');
+    };
+
     $.get('/api/lists')
         .error(Listy.handleAjaxFail)
         .success(function (dtos) {
@@ -14,18 +18,3 @@ Listy.Home.Index.ViewModel = function() {
         });
 };
 
-Listy.Home.Index.List = function(dto) {
-    var self = this;
-
-    self.name = ko.observable(dto.Name);
-    self.items = ko.observableArray(dto.Items.map(function(x) {
-        return new Listy.Home.Index.Item(x);
-    }));
-};
-
-Listy.Home.Index.Item = function(dto) {
-    var self = this;
-
-    self.name = ko.observable(dto.Name);
-    self.ordinal = ko.observable(dto.Ordinal);
-};

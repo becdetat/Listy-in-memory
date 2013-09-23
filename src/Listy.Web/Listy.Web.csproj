@@ -148,6 +148,7 @@
     <Compile Include="App_Start\nh\ListyAutomappingConfiguration.cs" />
     <Compile Include="App_Start\nh\ListyForeignKeyConvention.cs" />
     <Compile Include="App_Start\nh\NhibernateConfig.cs" />
+    <Compile Include="Controllers\Api\ListController.cs" />
     <Compile Include="Controllers\Api\ListsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JsController.cs" />
@@ -184,6 +185,8 @@
     <Content Include="Scripts\knockout-sortable.js" />
     <Content Include="Scripts\knockout-sortable.min.js" />
     <Content Include="Scripts\site\Listy.js" />
+    <Content Include="Scripts\site\Listy\Home\Index\Item.js" />
+    <Content Include="Scripts\site\Listy\Home\Index\List.js" />
     <Content Include="Scripts\site\Listy\Home\Index\ViewModel.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
