@@ -3,5 +3,20 @@
 @{
     ViewBag.Title = "Listy!!1!";
 }
+@section script
+{
+    <script>
+        ko.applyBindings(new Listy.Home.Index.ViewModel());
+    </script>
+}
 
 <h2>@ViewBag.Title</h2>
+
+<!-- ko foreach: lists -->
+<div class="col-lg-3">
+    <div class="panel panel-default">
+        <div class="panel-heading" data-bind="text: name"></div>
+    </div>
+</div>
+<!-- /ko -->
+

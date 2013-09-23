@@ -2,5 +2,6 @@
 {
     public interface IConfigurationProvider
     {
+        string ListyConnectionString { get; }
     }
 }

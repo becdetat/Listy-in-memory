@@ -20,9 +20,17 @@ namespace Listy.Web.App_Start
 
             builder.RegisterType<FileSystem>();
 
-            builder.RegisterType<ListyWebConfigurationProvider>()
-                   .As<IConfigurationProvider>()
-                   .SingleInstance()
+            var configurationProvider = new ListyWebConfigurationProvider();
+
+            builder
+                .RegisterInstance(configurationProvider)
+                .SingleInstance()
+                ;
+
+            var sessionFactory = NhibernateConfig.Register(configurationProvider);
+            builder
+                .RegisterInstance(sessionFactory)
+                .AsImplementedInterfaces()
                 ;
 
             var assemblies = new[]

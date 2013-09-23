@@ -143,6 +143,8 @@
     <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\ListyWebConfigurationProvider.cs" />
+    <Compile Include="App_Start\NhibernateConfig.cs" />
+    <Compile Include="Controllers\Api\ListsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -169,6 +171,7 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\extensions\namespace.js" />
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -176,6 +179,8 @@
     <Content Include="Scripts\knockout-2.3.0.js" />
     <Content Include="Scripts\knockout-sortable.js" />
     <Content Include="Scripts\knockout-sortable.min.js" />
+    <Content Include="Scripts\site\Listy.js" />
+    <Content Include="Scripts\site\Listy\Home\Index\ViewModel.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config" />
@@ -196,8 +201,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Css\site\" />
     <Folder Include="Models\" />
-    <Folder Include="Scripts\extensions\" />
-    <Folder Include="Scripts\site\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -206,6 +209,10 @@
     <ProjectReference Include="..\Listy.Core\Listy.Core.csproj">
       <Project>{CAC3B287-206C-4C11-A1A0-98782DA913D5}</Project>
       <Name>Listy.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Listy.Data\Listy.Data.csproj">
+      <Project>{D7185971-24E8-4E2F-B02A-C3EBD5E1F1DC}</Project>
+      <Name>Listy.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
