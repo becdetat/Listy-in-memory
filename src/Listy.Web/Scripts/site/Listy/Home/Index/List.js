@@ -8,12 +8,15 @@ Listy.Home.Index.List = function(dto) {
         return new Listy.Home.Index.Item(x);
     }));
     self.editing = ko.observable(false);
+    self.oldName = '';
 
     self.startEditing = function() {
         self.editing(true);
+        self.oldName = self.name();
     };
     self.cancel = function() {
         self.editing(false);
+        self.name(self.oldName);
     };
     self.save = function() {
         $.post('/api/list/' + dto.Id, self.toSaveViewModel())
@@ -32,5 +35,13 @@ Listy.Home.Index.List = function(dto) {
                 return x.toSaveModel();
             })
         };
+    };
+
+    self.addItem = function () {
+        // Whoops, implement editing an item first.
+        
+        //var item = new Listy.Home.Index.Item();
+        //item.
+        //self.items().add();
     };
 };

@@ -149,6 +149,7 @@
     <Compile Include="App_Start\nh\ListyForeignKeyConvention.cs" />
     <Compile Include="App_Start\nh\NhibernateConfig.cs" />
     <Compile Include="Controllers\Api\ListController.cs" />
+    <Compile Include="Controllers\Api\ListItemController.cs" />
     <Compile Include="Models\Api\List\ListItemUpdateModel.cs" />
     <Compile Include="Controllers\Api\ListsController.cs" />
     <Compile Include="Models\Api\List\ListUpdateModel.cs" />
