@@ -143,7 +143,11 @@
     <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\ListyWebConfigurationProvider.cs" />
-    <Compile Include="App_Start\NhibernateConfig.cs" />
+    <Compile Include="App_Start\nh\CascadeConvention.cs" />
+    <Compile Include="App_Start\nh\ForeignKeyRelationshipNotSupportedException.cs" />
+    <Compile Include="App_Start\nh\ListyAutomappingConfiguration.cs" />
+    <Compile Include="App_Start\nh\ListyForeignKeyConvention.cs" />
+    <Compile Include="App_Start\nh\NhibernateConfig.cs" />
     <Compile Include="Controllers\Api\ListsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JsController.cs" />

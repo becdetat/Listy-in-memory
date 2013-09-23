@@ -9,6 +9,7 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using Listy.Core.Configuration;
+using Listy.Web.App_Start.nh;
 
 namespace Listy.Web.App_Start
 {

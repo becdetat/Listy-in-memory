@@ -16,6 +16,9 @@
 <div class="col-lg-3">
     <div class="panel panel-default">
         <div class="panel-heading" data-bind="text: name"></div>
+        <ul class="list-group" data-bind="foreach: items">
+            <li class="list-group-item" data-bind="text: name"></li>
+        </ul>
     </div>
 </div>
 <!-- /ko -->

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Web.Http;
 using Listy.Data.Entities;
 using NHibernate;
@@ -28,11 +24,20 @@ namespace Listy.Web.Controllers.Api
                         .QueryOver<ListyList>()
                         .OrderBy(l => l.Name).Asc
                         .List<ListyList>();
-                    return lists.Select(l => new
+
+                    var result = lists.Select(l => new
                         {
-                            Id = l.Id,
-                            Name= l.Name,
-                        });
+                            l.Id,
+                            l.Name,
+                            Items = l.Items.OrderBy(i => i.Ordinal).Select(x => new
+                                {
+                                    x.Id,
+                                    x.Name,
+                                    x.Ordinal,
+                                }).ToArray()
+                        }).ToArray();
+
+                    return result;
                 }
             }
         }
