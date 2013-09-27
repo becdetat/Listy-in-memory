@@ -7,46 +7,32 @@ Listy.Home.Index.List = function(dto) {
     self.items = ko.observableArray(dto.Items.map(function(x) {
         return new Listy.Home.Index.Item(x);
     }));
-    self.editing = ko.observable(false);
+    self.isEditingName = ko.observable(false);
     self.oldName = '';
-    self.isAddingItem = ko.observable(false);
-    self.editedItem = ko.observable();
 
-    self.startEditing = function() {
-        self.editing(true);
+    self.startEditingName = function() {
+        self.isEditingName(true);
         self.oldName = self.name();
     };
-    self.cancel = function() {
-        self.editing(false);
+    self.cancelEditingName = function () {
+        self.isEditingName(false);
         self.name(self.oldName);
     };
-
-    self.startEditingItem = function(item) {
-        item.startEditing();
-        self.editedItem(item);
-    };
-
-    self.cancelEditingItem = function(item) {
-        item.cancelEditing();
-        if (self.isAddingItem()) {
-            self.items.pop();
-            self.isAddingItem(false);
+    self.handleKeyUp = function(data, event) {
+        if (event.keyCode === 27) {
+            self.cancelEditingName();
+            return false;
         }
     };
 
-    self.save = function() {
+    self.save = function () {
         $.post('/api/list/' + dto.Id, self.toSaveViewModel())
             .error(Listy.handleAjaxFail)
             .success(function() {
             })
             .always(function() {
-                self.editing(false);
-                if (self.editedItem()) {
-                    self.editedItem().finishEditing();
-                    self.editedItem(null);
-                }
-                self.isAddingItem(false);
             });
+        self.isEditingName(false);
         return false;
     };
     self.toSaveViewModel = function() {
@@ -56,13 +42,5 @@ Listy.Home.Index.List = function(dto) {
                 return x.toSaveModel();
             })
         };
-    };
-
-    self.addItem = function () {
-        self.isAddingItem(true);
-        var item = new Listy.Home.Index.Item();
-        item.startEditing();
-        self.editedItem(item);
-        self.items.push(item);
     };
 };

@@ -24,35 +24,45 @@
 <div class="col-lg-3">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <span data-bind="text: name, visible: !editing(), click: startEditing"></span>
-            <form data-bind="visible: editing, submit: save">
+            <span data-bind="text: name, visible: !isEditingName(), click: startEditingName"></span>
+            <form data-bind="visible: isEditingName, submit: save">
                 <div class="input-group">
-                    <input class="form-control" type="text" data-bind="value: name" />
+                    <input class="form-control" type="text" data-bind="value: name, valueUpdate: 'afterkeydown', event: { keyup: handleKeyUp }, hasFocus: isEditingName" />
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-ok"></i></button>
-                        <button class="btn btn-danger" data-bind="click: cancel"><i class="glyphicon glyphicon-remove"></i></button>    
+                        <button class="btn btn-primary" type="submit" data-bind="enable: (name() != '')"><i class="glyphicon glyphicon-ok"></i></button>
+                        <button class="btn btn-danger" data-bind="click: cancelEditingName"><i class="glyphicon glyphicon-remove"></i></button>    
                     </span>
                 </div>
             </form>
         </div>
         <ul class="list-group" data-bind="sortable: { data: items, afterMove: save }">
-            <li class="list-group-item">
-                <span data-bind="text: name, visible: !editing(), click: $parent.startEditingItem"></span>
-                <form data-bind="visible: editing, submit: $parent.save">
-                    <div class="input-group">
-                        <input class="form-control" type="text" data-bind="value: name"/>
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-ok"></i></button>
-                            <button class="btn btn-danger" data-bind="click: $parent.cancelEditingItem"><i class="glyphicon glyphicon-remove"></i></button>
-                        </span>
-                    </div>
-                </form>
+            <li class="list-group-item" data-bind="click: $root.startEditingListItem">
+                <span data-bind="text: name"></span>
             </li>
         </ul>
-        <div class="panel-footer" data-bind="visible: !isAddingItem(), click: addItem">
+        <div class="panel-footer" data-bind="click: $root.startAddingListItem">
             + Add an item
         </div>
     </div>
 </div>
 <!-- /ko -->
 
+<div class="modal fade" data-bind="with: currentListItem" id="currentListItemModal">
+    <form class="modal-dialog" data-bind="submit: $root.saveEditedListItem">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit item</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="itemName">Name</label>
+                    <input type="text" class="form-control" id="itemName" data-bind="value: name, valueUpdate: 'afterkeydown'"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bind="click: $root.cancelEditingListItem">Cancel</button>
+                <button type="submit" class="btn btn-primary" data-bind="enable: (name() != '')">Save</button>
+            </div>
+        </div>
+    </form>
+</div>

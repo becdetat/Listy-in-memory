@@ -3,10 +3,11 @@
 Listy.Home.Index.Item = function (dto) {
     var self = this;
 
+    self.isNew = ko.observable(dto ? false : true);
+    
     self.id = dto ? dto.Id : [];
     self.name = ko.observable(dto ? dto.Name : '');
-    self.editing = ko.observable(false);
-    self.oldName = [];
+    self.oldName = '';
 
     self.toSaveModel = function() {
         return {
@@ -15,18 +16,19 @@ Listy.Home.Index.Item = function (dto) {
         };
     };
 
-    self.startEditing = function () {
-        self.editing(true);
+    self.startEditing = function() {
         self.oldName = self.name();
     };
-
-    self.finishEditing = function() {
-        self.editing(false);
+    self.cancelEditing = function() {
+        self.name(self.oldName);
     };
 
-    self.cancelEditing = function () {
-        self.editing(false);
-        self.name(self.oldName);
+    self.save = function () {
+        self.isNew(false);
+        $.post('/api/listitem/' + self.id, self.toSaveModel())
+            .error(Listy.handleAjaxFail)
+        ;
+        return false;
     };
 };
 

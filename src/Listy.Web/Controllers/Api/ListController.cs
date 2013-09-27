@@ -33,7 +33,7 @@ namespace Listy.Web.Controllers.Api
                 {
                     var listItem = GetOrAddItem(list, item);
                     listItem.Ordinal = ordinal++;
-                    listItem.Name = item.Name;
+                    listItem.Name = item.Name ?? "";
                 }
 
                 transaction.Commit();
