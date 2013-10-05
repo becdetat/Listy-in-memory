@@ -2,7 +2,7 @@
 
 namespace Listy.Web.Controllers
 {
-    public class HomeController : Controller
+    public class SearchyController : Controller
     {
         public ActionResult Index()
         {

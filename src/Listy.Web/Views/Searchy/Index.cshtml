@@ -1,0 +1,43 @@
+﻿@using Listy.Web.Infrastructure
+@{
+    ViewBag.NavigationSection = NavigationSection.Searchy;
+    ViewBag.Title = "Searchy o_O";
+}
+@section script
+{
+    <script>
+        ko.applyBindings(new Listy.Searchy.Index.ViewModel());
+    </script>
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form>
+    <div class="input-group">
+        <input class="form-control" type="text" data-bind="value: term, valueUpdate: 'afterkeydown', hasFocus: true"/>
+    </div>
+</form>
+
+<h3>Results</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>List</th>
+            <th>Item</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan='2'>
+                <em><span data-bind="text: items().length"></span> results</em>
+            </td>
+        </tr>
+        
+        <!-- ko foreach: items -->
+        <tr>
+            <td data-bind="text: list"></td>
+            <td data-bind="text: item"></td>
+        </tr>
+        <!-- /ko -->
+    </tbody>
+</table>

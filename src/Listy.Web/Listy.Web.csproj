@@ -150,6 +150,9 @@
     <Compile Include="App_Start\nh\NhibernateConfig.cs" />
     <Compile Include="Controllers\Api\ListController.cs" />
     <Compile Include="Controllers\Api\ListItemController.cs" />
+    <Compile Include="Controllers\Api\SearchController.cs" />
+    <Compile Include="Controllers\SearchyController.cs" />
+    <Compile Include="Infrastructure\NavigationSection.cs" />
     <Compile Include="Models\Api\List\ListItemUpdateModel.cs" />
     <Compile Include="Controllers\Api\ListsController.cs" />
     <Compile Include="Models\Api\List\ListUpdateModel.cs" />
@@ -255,6 +258,7 @@
     <Content Include="Scripts\site\Listy\Home\Index\Item.js" />
     <Content Include="Scripts\site\Listy\Home\Index\List.js" />
     <Content Include="Scripts\site\Listy\Home\Index\ViewModel.js" />
+    <Content Include="Scripts\site\Listy\Searchy\Index\ViewModel.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config" />
@@ -269,6 +273,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Scripts\toastr.min.js.map" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Searchy\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
