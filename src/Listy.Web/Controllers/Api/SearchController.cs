@@ -1,40 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Web.Http;
-using Listy.Data.Entities;
-using NHibernate;
-using NHibernate.Linq;
+using Listy.Data;
 
 namespace Listy.Web.Controllers.Api
 {
     public class SearchController : ApiController
     {
-        private readonly ISessionFactory _sessionFactory;
+        private readonly IDataContext _dataContext;
 
-        public SearchController(ISessionFactory sessionFactory)
+        public SearchController(IDataContext dataContext)
         {
-            _sessionFactory = sessionFactory;
+            _dataContext = dataContext;
         }
 
         public object Get(string term)
         {
-            // Note this uses LINQ to NHibernate. The ListsController uses QueryOver.
-
-            using (var session = _sessionFactory.OpenSession())
-            {
-                return session.Query<ListyListItem>()
-                              .Where(i => i.Name.Contains(term))
-                              .Select(x => new
-                                  {
-                                      List = x.ListyList.Name,
-                                      Item = x.Name,
-                                  })
-                              .ToArray()
-                    ;
-            }
+            return from list in _dataContext.ListyLists
+                   from item in list.Items
+                   where item.Name.Contains(term)
+                   select new
+                       {
+                           List = list.Name,
+                           Item = item.Name
+                       };
         }
     }
 }

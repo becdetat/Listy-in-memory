@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO.Abstractions;
-using System.Linq;
-using System.Web;
+﻿using System.IO.Abstractions;
 using System.Web.Http;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using Listy.Core.Configuration;
-using Listy.Web.App_Start.nh;
+using Listy.Data;
 
 namespace Listy.Web.App_Start
 {
@@ -28,17 +24,16 @@ namespace Listy.Web.App_Start
                 .SingleInstance()
                 ;
 
-            var sessionFactory = NhibernateConfig.Register(configurationProvider);
             builder
-                .RegisterInstance(sessionFactory)
-                .AsImplementedInterfaces()
-                ;
+                .RegisterType<DataContext>()
+                .As<IDataContext>()
+                .SingleInstance();
 
             var assemblies = new[]
                 {
                     typeof (MvcApplication).Assembly,
                     typeof (IConfigurationProvider).Assembly,
-                    //typeof(..something in Listy.Data).Assembly,
+                    typeof (IDataContext).Assembly,
                 };
 
             builder.RegisterAssemblyTypes(assemblies);
