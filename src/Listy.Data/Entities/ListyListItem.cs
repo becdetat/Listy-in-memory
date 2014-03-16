@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Listy.Core.Invariants;
 
 namespace Listy.Data.Entities
 {
@@ -23,6 +24,8 @@ namespace Listy.Data.Entities
 
         public void SetOrdinal(int ordinal)
         {
+            Guard.Against(() => ordinal < 0);
+
             Ordinal = ordinal;
         }
 

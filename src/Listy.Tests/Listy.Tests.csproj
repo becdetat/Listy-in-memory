@@ -47,8 +47,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConcernFor.cs" />
     <Compile Include="Core\Invariants\GuardTests\GuardAgainstTests.cs" />
     <Compile Include="Core\Invariants\GuardTests\GuardForTests.cs" />
+    <Compile Include="Data\Entities\ListyListItemTests\SettingTheOrdinal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
